@@ -15,11 +15,11 @@ const convertTimestampToDate = (timestamp) => new Date(parseInt(timestamp, 10));
  * @private
  */
 const extractDateComponents = (date) => ({
-    year: date.getFullYear(),
-    month: String(date.getMonth() + 1).padStart(2, '0'),
-    day: String(date.getDate()).padStart(2, '0'),
-    hours: String(date.getHours()).padStart(2, '0'),
-    minutes: String(date.getMinutes()).padStart(2, '0'),
+  year: date.getFullYear(),
+  month: String(date.getMonth() + 1).padStart(2, "0"),
+  day: String(date.getDate()).padStart(2, "0"),
+  hours: String(date.getHours()).padStart(2, "0"),
+  minutes: String(date.getMinutes()).padStart(2, "0"),
 });
 
 /**
@@ -29,12 +29,12 @@ const extractDateComponents = (date) => ({
  * @returns {string} The formatted date.
  */
 export const formatTimestampToDateTime = (timestamp) => {
-    const date = convertTimestampToDate(timestamp);
-    const { year, month, day, hours, minutes } = extractDateComponents(date);
+  const date = convertTimestampToDate(timestamp);
+  const { year, month, day, hours, minutes } = extractDateComponents(date);
 
-    const seconds = String(date.getSeconds()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, "0");
 
-    return `${month}/${day}/${year} ${hours}:${minutes}:${seconds}`;
+  return `${month}/${day}/${year} ${hours}:${minutes}:${seconds}`;
 };
 
 /**
@@ -44,8 +44,8 @@ export const formatTimestampToDateTime = (timestamp) => {
  * @returns {string} A formatted string in the "yyyy-MM-ddThh:mm" format.
  */
 export const formatTimestampToISOString = (timestamp) => {
-    const date = convertTimestampToDate(timestamp);
-    const { year, month, day, hours, minutes } = extractDateComponents(date);
+  const date = convertTimestampToDate(timestamp);
+  const { year, month, day, hours, minutes } = extractDateComponents(date);
 
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
 };

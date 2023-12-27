@@ -1,8 +1,7 @@
-import { jwtDecode  }from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
-
-// Decodes a JWT token using the jwt-decode library. 
-// If successful, it returns the decoded token; 
+// Decodes a JWT token using the jwt-decode library.
+// If successful, it returns the decoded token;
 // otherwise, it logs an error and returns null.
 export const decodeToken = (token) => {
   try {
