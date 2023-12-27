@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon src/index",
+    "test": "mocha --require @babel/register test/**/*.js",
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -28,6 +31,7 @@
     "chai-http": "^4.4.0",
     "mocha": "^10.2.0",
     "nodemon": "^3.0.2",
+    "prettier": "^3.1.1",
     "sinon": "^17.0.1",
     "sinon-chai": "^3.7.0"
   }
