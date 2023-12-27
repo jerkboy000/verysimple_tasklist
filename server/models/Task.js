@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/database");
 
-const Task = sequelize.define('Task', {
+const Task = sequelize.define("Task", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -19,7 +19,7 @@ const Task = sequelize.define('Task', {
     allowNull: false,
   },
   status: {
-    type: DataTypes.ENUM('NOT STARTED', 'IN PROGRESS', 'COMPLETED'),
+    type: DataTypes.ENUM("NOT STARTED", "IN PROGRESS", "COMPLETED"),
     allowNull: false,
   },
   // Add user_id field with a specific foreign key name 'assignedUserId'
@@ -27,11 +27,11 @@ const Task = sequelize.define('Task', {
     type: DataTypes.INTEGER,
     allowNull: true,
     references: {
-      model: 'User', // 'User' refers to the table name
-      key: 'id',
+      model: "User", // 'User' refers to the table name
+      key: "id",
     },
     // Specify the name of the foreign key
-    field: 'assignedUserId',
+    field: "assignedUserId",
   },
 });
 

@@ -8,7 +8,7 @@ const generateToken = (user) => {
     const token = jwt.sign(
       { id: user.id, email: user.email },
       process.env.AUTH_SECRET_KEY,
-      { expiresIn: '1h' }
+      { expiresIn: "1h" },
     );
     logger.info(`Token generated successfully for user: ${user.email}`);
     return token;
@@ -30,7 +30,7 @@ const verifyToken = (token) => {
   }
 };
 
-module.exports = { 
-    generateToken,
-    verifyToken,
+module.exports = {
+  generateToken,
+  verifyToken,
 };
