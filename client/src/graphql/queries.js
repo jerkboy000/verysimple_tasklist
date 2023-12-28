@@ -24,9 +24,15 @@ export const GET_ALL_TASKS = gql`
   }
 `;
 
+export const GET_TASK_COUNT_BY_USER = gql`
+  query GetTaskCountByUser($user_id: Int!) {
+    getTaskCountByUser(user_id: $user_id)
+  }
+`;
+
 export const GET_TASKS_BY_USER = gql`
-  query GetTasksByUser($user_id: Int!) {
-    getTasksByUser(user_id: $user_id) {
+  query GetTasksByUser($user_id: Int!, $page: Int!, $pageSize: Int!) {
+    getTasksByUser(user_id: $user_id, page: $page, pageSize: $pageSize) {
       id
       user_id
       name

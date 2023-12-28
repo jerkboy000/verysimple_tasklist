@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_TASKS_BY_USER } from "../../../graphql/queries";
+import { GET_TASKS_BY_USER, GET_TASK_COUNT_BY_USER } from "../../../graphql/queries";
 import { DELETE_TASK } from "../../../graphql/mutations";
 import { useNavigate } from "react-router-dom";
 import { getUserIdFromCookie } from "../../js/cookie_util";
@@ -12,7 +12,18 @@ const TaskList = () => {
 
   const navigate = useNavigate();
 
-  const { loading, error, data, refetch } = useQuery(GET_TASKS_BY_USER, {
+  const [currentPage, setCurrentPage] = useState(1);
+  const tasksPerPage = 5; // Number of tasks to display per page
+
+  const { loading: tasksLoading, error: tasksError, data: tasksData, refetch: tasksRefetch } = useQuery(GET_TASKS_BY_USER, {
+    variables: {
+      user_id: parseInt(getUserIdFromCookie()),
+      page: currentPage,
+      pageSize: tasksPerPage,
+    },
+  });
+
+  const { loading: countLoading, error: countError, data: countData } = useQuery(GET_TASK_COUNT_BY_USER, {
     variables: {
       user_id: parseInt(getUserIdFromCookie()),
     },
@@ -25,7 +36,12 @@ const TaskList = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const tasks = data.getTasksByUser;
+  const tasks = tasksData.getTasksByUser;
+  const totalCount = countData.getTaskCountByUser;
+
+  const indexOfLastTask = currentPage * tasksPerPage;
+  const indexOfFirstTask = indexOfLastTask - tasksPerPage;
+  const currentTasks = tasks.slice(indexOfFirstTask, indexOfLastTask);
 
   const handleClick = () => {
     navigate("/task_form");
