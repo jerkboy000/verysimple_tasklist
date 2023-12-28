@@ -1,5 +1,10 @@
 # Very Simple Task List App
 
+## Important Note
+
+This app is currently in development and is intended for educational purposes. It is not production-ready and lacks proper validations and may contain bugs. Use it with caution and feel free to contribute to its improvement.
+
+
 ## Main Features
 
 1. **User Authentication:**
@@ -50,7 +55,6 @@
    - Add the following variables to the `.env` file:
 
      ```env
-     NODE_ENV=development
      PORT=7000
 
      DB_DIALECT=mysql
