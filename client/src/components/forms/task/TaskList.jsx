@@ -11,7 +11,8 @@ const TaskList = () => {
   checkTokenAndNavigate();
 
   const navigate = useNavigate();
-  const { loading, error, data } = useQuery(GET_TASKS_BY_USER, {
+
+  const { loading, error, data, refetch } = useQuery(GET_TASKS_BY_USER, {
     variables: {
       user_id: parseInt(getUserIdFromCookie()),
     },
@@ -35,16 +36,17 @@ const TaskList = () => {
     navigate(`/task_form/${taskId}`, { state: { taskToEdit } });
   };
 
-  const handleDeleteClick = (taskId) => {
+  const handleDeleteClick = async (taskId) => {
     if (window.confirm("Are you sure you want to delete this task?")) {
-      deleteTask({ variables: { id: taskId } });
+      await deleteTask({ variables: { id: taskId } });
+      refetch();
     }
   };
 
   const thStyle = {
-    background: "#343a40", 
-    color: "#fff"
-  }
+    background: "#343a40",
+    color: "#fff",
+  };
 
   return (
     <div className="container mt-5">
@@ -88,10 +90,7 @@ const TaskList = () => {
       </table>
       <br />
       <br />
-      <button
-        onClick={handleClick}
-        className="btn btn-success"
-      >
+      <button onClick={handleClick} className="btn btn-success">
         Add Task
       </button>
     </div>
