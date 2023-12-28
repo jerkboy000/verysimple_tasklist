@@ -31,28 +31,28 @@ const Header = () => {
   return (
     <header className="bg-primary text-white">
       <nav className="container">
-        <div className="py-1">
-          <h3>{welcome}</h3>
+        <div className="py-1 d-flex justify-content-between align-items-center">
+          <h4>{welcome}</h4>
+          {isLoggedIn ? (
+            <div className="d-flex">
+              <Link to="/" className="btn btn-light me-2">
+                Home
+              </Link>
+              <Link to="/tasklist" className="btn btn-light me-2">
+                Tasks
+              </Link>
+              <button
+                style={logoutStyle}
+                className="btn btn-danger"
+                onClick={handleLogOut}
+              >
+                Log Out
+              </button>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
-        {isLoggedIn ? (
-          <div className="d-flex justify-content-end">
-            <Link to="/" className="btn btn-light me-2">
-              Home
-            </Link>
-            <Link to="/tasklist" className="btn btn-light me-2">
-              Tasks
-            </Link>
-            <button
-              style={logoutStyle}
-              className="btn btn-danger"
-              onClick={handleLogOut}
-            >
-              Log Out
-            </button>
-          </div>
-        ) : (
-          <></>
-        )}
       </nav>
     </header>
   );
