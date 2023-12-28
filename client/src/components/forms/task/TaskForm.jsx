@@ -6,8 +6,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getUserIdFromCookie } from "../../js/cookie_util";
 import { checkTokenAndNavigate } from "../../js/helper";
 import { formatTimestampToISOString } from "../../js/date_util";
-import "../../css/TaskForm.css";
-import "../../css/FormStyles.css";
 
 const TaskForm = () => {
   checkTokenAndNavigate();

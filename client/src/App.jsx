@@ -13,8 +13,6 @@ import HomePage from "./components/HomePage";
 import TaskList from "./components/forms/task/TaskList";
 import TaskForm from "./components/forms/task/TaskForm";
 
-import "./components/css/Generic.css";
-
 function App() {
   return (
     <ApolloProvider client={client}>

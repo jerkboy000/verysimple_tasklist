@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { getUserIdFromCookie } from "../../js/cookie_util";
 import { checkTokenAndNavigate } from "../../js/helper";
 import { formatTimestampToDateTime } from "../../js/date_util";
-import "../../css/TaskList.css";
 
 const TaskList = () => {
   checkTokenAndNavigate();
