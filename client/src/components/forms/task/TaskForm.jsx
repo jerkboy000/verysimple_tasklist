@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_TASK, UPDATE_TASK } from "../../../graphql/mutations"; 
-import { GET_TASK_DETAILS } from "../../../graphql/queries";
+import { GET_TASK_DETAILS, GET_TASKS_BY_USER } from "../../../graphql/queries";
 import { useNavigate, useParams } from "react-router-dom";
 import { getUserIdFromCookie } from "../../js/cookie_util";
 import { checkTokenAndNavigate } from "../../js/helper";
@@ -21,8 +21,12 @@ const TaskForm = () => {
     user_id: parseInt(getUserIdFromCookie()),
   });
 
-  const [createTask] = useMutation(CREATE_TASK);
-  const [updateTask] = useMutation(UPDATE_TASK);
+  const [createTask] = useMutation(CREATE_TASK, {
+    refetchQueries: [{ query: GET_TASKS_BY_USER }],
+  });
+  const [updateTask] = useMutation(UPDATE_TASK, {
+    refetchQueries: [{ query: GET_TASKS_BY_USER }],
+  });
   const { loading, error, data } = useQuery(GET_TASK_DETAILS, {
     variables: { taskId },
     skip: !taskId, // Skip the query if taskId is not present
@@ -52,23 +56,28 @@ const TaskForm = () => {
     e.preventDefault();
     try {
       if (taskId) {
-        // If taskId is present, it's an edit operation
         await updateTask({
           variables: { id: taskId, ...formData },
         });
       } else {
-        // If taskId is not present, it's a create operation
         await createTask({
           variables: formData,
         });
       }
 
+      await refetchTasks(); // Manually refetch tasks
       navigate("/tasklist");
-      window.location.reload();
     } catch (error) {
       console.error(error);
     }
   };
+
+  const { refetch: refetchTasks } = useQuery(GET_TASKS_BY_USER, {
+    variables: {
+      user_id: parseInt(getUserIdFromCookie()),
+    },
+  });
+
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -84,52 +93,55 @@ const TaskForm = () => {
         className="p-4 rounded task-form"
         style={{ backgroundColor: "#e0f7fa" }} // Very faint sky blue
       >
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name" className="form-label">Task Name:</label>
         <input
           type="text"
           name="name"
           value={formData.name}
           onChange={handleInputChange}
-          className="form-control"
+          className="form-control mb-3"
+          placeholder="Enter task name"
           required
         />
 
-        <label htmlFor="description">Description:</label>
+        <label htmlFor="description" className="form-label">Description:</label>
         <input
           type="text"
           name="description"
           value={formData.description}
           onChange={handleInputChange}
-          className="form-control"
+          className="form-control mb-3"
+          placeholder="Enter task description"
           required
         />
 
-        <label htmlFor="note">Note:</label>
+        <label htmlFor="note" className="form-label">Note:</label>
         <input
           type="text"
           name="note"
           value={formData.note}
           onChange={handleInputChange}
-          className="form-control"
+          className="form-control mb-3"
+          placeholder="Enter additional notes"
           required
         />
 
-        <label htmlFor="due_date">Due Date:</label>
+        <label htmlFor="due_date" className="form-label">Due Date:</label>
         <input
           type="datetime-local"
           name="due_date"
           value={formData.due_date}
           onChange={handleInputChange}
-          className="form-control"
+          className="form-control mb-3"
           required
         />
 
-        <label htmlFor="status">Status:</label>
+        <label htmlFor="status" className="form-label">Status:</label>
         <select
           name="status"
           value={formData.status}
           onChange={handleInputChange}
-          className="form-control"
+          className="form-control mb-3"
           required
         >
           <option value="NOT STARTED">NOT STARTED</option>
@@ -137,8 +149,6 @@ const TaskForm = () => {
           <option value="COMPLETED">COMPLETED</option>
         </select>
 
-        <br />
-        <br />
         <div className="mb-3 d-flex justify-content-center">
           <button type="submit" disabled={loading} className="btn btn-success me-2">
             &nbsp;&nbsp;Save&nbsp;&nbsp;
