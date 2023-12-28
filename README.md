@@ -103,3 +103,9 @@
      ```bash
      npm run dev
      ```
+
+     or
+
+     ```bash
+     npm start
+     ```
