@@ -12,7 +12,7 @@ const TaskList = () => {
 
   const navigate = useNavigate();
   const { loading, error, data } = useQuery(GET_TASKS_BY_USER, {
-    variables: { 
+    variables: {
       user_id: parseInt(getUserIdFromCookie()),
     },
   });
@@ -30,29 +30,21 @@ const TaskList = () => {
     navigate("/task_form");
   };
 
-  // Inside TaskList.jsx
   const handleEditClick = (taskId) => {
-    // Find the task to edit based on taskId
     const taskToEdit = tasks.find((task) => task.id === taskId);
-
-    // Navigate to the task form with the task details for editing
     navigate(`/task_form/${taskId}`, { state: { taskToEdit } });
- };
-
+  };
 
   const handleDeleteClick = (taskId) => {
-    // Confirm before deleting
     if (window.confirm("Are you sure you want to delete this task?")) {
-      // Call the deleteTask mutation
       deleteTask({ variables: { id: taskId } });
-      window.location.reload();
     }
   };
 
   return (
-    <div className="task-list">
+    <div className="container mt-5">
       <h2>Your Tasks</h2>
-      <table>
+      <table className="table table-bordered">
         <thead>
           <tr>
             <th>Action</th>
@@ -67,10 +59,15 @@ const TaskList = () => {
           {tasks.map((task) => (
             <tr key={task.id}>
               <td>
-                <button onClick={() => handleEditClick(task.id)}>Edit</button>
+                <button
+                  onClick={() => handleEditClick(task.id)}
+                  className="btn btn-primary me-2"
+                >
+                  Edit
+                </button>
                 <button
                   onClick={() => handleDeleteClick(task.id)}
-                  style={{ color: "blue", backgroundColor: "red" }}
+                  className="btn btn-danger"
                 >
                   Delete
                 </button>
@@ -86,7 +83,12 @@ const TaskList = () => {
       </table>
       <br />
       <br />
-      <button onClick={handleClick}>Add Task</button>
+      <button
+        onClick={handleClick}
+        className="btn btn-success"
+      >
+        Add Task
+      </button>
     </div>
   );
 };

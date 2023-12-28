@@ -75,25 +75,63 @@ const TaskForm = () => {
 
   const cancelStyle = {
     background: "red"
-  }
+  };
 
   return (
-    <div className="task-form-container">
-      <form onSubmit={handleSubmit} className="task-form">
-        <label>Name:</label>
-        <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
+    <div className="container mt-5 d-flex justify-content-center">
+      <form
+        onSubmit={handleSubmit}
+        className="p-4 rounded task-form"
+        style={{ backgroundColor: "#e0f7fa" }} // Very faint sky blue
+      >
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleInputChange}
+          className="form-control"
+          required
+        />
 
-        <label>Description:</label>
-        <input type="text" name="description" value={formData.description} onChange={handleInputChange} required />
+        <label htmlFor="description">Description:</label>
+        <input
+          type="text"
+          name="description"
+          value={formData.description}
+          onChange={handleInputChange}
+          className="form-control"
+          required
+        />
 
-        <label>Note:</label>
-        <input type="text" name="note" value={formData.note} onChange={handleInputChange} required />
+        <label htmlFor="note">Note:</label>
+        <input
+          type="text"
+          name="note"
+          value={formData.note}
+          onChange={handleInputChange}
+          className="form-control"
+          required
+        />
 
-        <label>Due Date:</label>
-        <input type="datetime-local" name="due_date" value={formData.due_date} onChange={handleInputChange} required />
+        <label htmlFor="due_date">Due Date:</label>
+        <input
+          type="datetime-local"
+          name="due_date"
+          value={formData.due_date}
+          onChange={handleInputChange}
+          className="form-control"
+          required
+        />
 
-        <label>Status:</label>
-        <select name="status" value={formData.status} onChange={handleInputChange} required>
+        <label htmlFor="status">Status:</label>
+        <select
+          name="status"
+          value={formData.status}
+          onChange={handleInputChange}
+          className="form-control"
+          required
+        >
           <option value="NOT STARTED">NOT STARTED</option>
           <option value="IN PROGRESS">IN PROGRESS</option>
           <option value="COMPLETED">COMPLETED</option>
@@ -101,12 +139,16 @@ const TaskForm = () => {
 
         <br />
         <br />
-        <div>
-          <button type="submit" disabled={loading} className="form-button">
-            Save
+        <div className="mb-3 d-flex justify-content-center">
+          <button type="submit" disabled={loading} className="btn btn-success me-2">
+            &nbsp;&nbsp;Save&nbsp;&nbsp;
           </button>
-          <button type="button" className="form-button" 
-            style={cancelStyle} onClick={() => navigate("/tasklist")}>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            style={cancelStyle}
+            onClick={() => navigate("/tasklist")}
+          >
             Cancel
           </button>
         </div>
