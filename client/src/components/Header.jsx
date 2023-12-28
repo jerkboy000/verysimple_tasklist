@@ -9,7 +9,7 @@ const Header = () => {
     clearCookies();
     navigate("/");
     window.location.reload();
-  }
+  };
 
   const [welcome, setWelcome] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,41 +17,42 @@ const Header = () => {
   useEffect(() => {
     const userId = getUserIdFromCookie();
     if (userId) {
-        setIsLoggedIn(true);
-        setWelcome("Welcome, " + getUserInfoFromCookie() + "!");
+      setIsLoggedIn(true);
+      setWelcome("Welcome, " + getUserInfoFromCookie() + "!");
     } else {
-        setWelcome("Not signed up or logged in!");
+      setWelcome("Not signed up or logged in!");
     }
   }, []);
 
   const logoutStyle = {
     background: "red",
-    float: "right"
   };
 
   return (
-    <header>
-      <nav>
-        <br />
-        <br />
-        <div>
-            <h1>{welcome}</h1>
+    <header className="bg-primary text-white">
+      <nav className="container">
+        <div className="py-1">
+          <h3>{welcome}</h3>
         </div>
-        {isLoggedIn ? 
-            ( <div> 
-            <Link to="/">
-                <button>Home</button>
+        {isLoggedIn ? (
+          <div className="d-flex justify-content-end">
+            <Link to="/" className="btn btn-light me-2">
+              Home
             </Link>
-            &nbsp;
-            <Link to="/tasklist">
-                <button>Tasks</button>
+            <Link to="/tasklist" className="btn btn-light me-2">
+              Tasks
             </Link>
-            <button style={logoutStyle}  onClick={handleLogOut}>
-                Log Out
+            <button
+              style={logoutStyle}
+              className="btn btn-danger"
+              onClick={handleLogOut}
+            >
+              Log Out
             </button>
-        </div> )
-        : (<></>)
-        }
+          </div>
+        ) : (
+          <></>
+        )}
       </nav>
     </header>
   );
