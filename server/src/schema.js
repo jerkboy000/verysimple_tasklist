@@ -5,7 +5,8 @@ const typeDefs = gql`
     getUser(id: ID!): User!
     getTask(id: ID!): Task
     getAllTasks: [Task]
-    getTasksByUser(user_id: Int!): [Task]
+    getTasksByUser(user_id: Int!, page: Int!, pageSize: Int!): [Task]
+    getTaskCountByUser(user_id: Int!): Int
   }
 
   type User {

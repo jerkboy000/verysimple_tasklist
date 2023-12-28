@@ -47,9 +47,26 @@ const resolvers = {
         throw error;
       }
     },
-    getTasksByUser: async (_, { user_id }) => {
+    getTaskCountByUser: async (_, { user_id }) => {
       try {
-        const tasks = await Task.findAll({ where: { user_id } });
+        const totalCount = await Task.count({ where: { user_id } });
+        logger.info(`Retrieved task count by user ID: ${user_id}`);
+        return totalCount;
+      } catch (error) {
+        logger.error(
+          `Error retrieving task count by user ID ${user_id}: ${error.message}`,
+        );
+        throw error;
+      }
+    },
+    getTasksByUser: async (_, { user_id, page, pageSize } ) => {
+      try {
+        const tasks = await Task.findAll({
+          where: { user_id },
+          offset: (page - 1) * pageSize,
+          limit: pageSize,
+        }); 
+
         logger.info(`Retrieved tasks by user ID: ${user_id}`);
         return tasks;
       } catch (error) {
