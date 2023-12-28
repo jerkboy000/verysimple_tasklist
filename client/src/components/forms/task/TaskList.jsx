@@ -41,18 +41,23 @@ const TaskList = () => {
     }
   };
 
+  const thStyle = {
+    background: "#343a40", 
+    color: "#fff"
+  }
+
   return (
     <div className="container mt-5">
       <h2>Your Tasks</h2>
       <table className="table table-bordered">
-        <thead>
+        <thead className="thead-dark">
           <tr>
-            <th>Action</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Note</th>
-            <th>Due Date</th>
-            <th>Status</th>
+            <th style={thStyle}>Action</th>
+            <th style={thStyle}>Name</th>
+            <th style={thStyle}>Description</th>
+            <th style={thStyle}>Note</th>
+            <th style={thStyle}>Due Date</th>
+            <th style={thStyle}> Status</th>
           </tr>
         </thead>
         <tbody>
