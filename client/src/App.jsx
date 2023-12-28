@@ -1,16 +1,40 @@
 import React from "react";
-import { Button, Navbar, Container } from "react-bootstrap";
+import { ApolloProvider } from "@apollo/client";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { client } from "./client";
 
-const App = () => {
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+
+import SignUpForm from "./components/forms/user/SignUpForm";
+import LogInForm from "./components/forms/user/LogInForm";
+import HomePage from "./components/HomePage";
+
+import TaskList from "./components/forms/task/TaskList";
+import TaskForm from "./components/forms/task/TaskForm";
+
+import "./components/css/Generic.css";
+
+function App() {
   return (
-    <Container>
-      <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home">React Bootstrap</Navbar.Brand>
-        <Button variant="outline-light">Button</Button>
-      </Navbar>
-      <p>This is a React Bootstrap application.</p>
-    </Container>
+    <ApolloProvider client={client}>
+      <Router>
+        <Header />
+        <div className="content-wrapper">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/signup" element={<SignUpForm />} />
+            <Route path="/login" element={<LogInForm />} />
+            <Route path="/tasklist" element={<TaskList />} />
+            <Route path="/task_form" element={<TaskForm />} />
+            <Route path="/task_form/:taskId" element={<TaskForm />} />
+          </Routes>
+        </div>
+        <Footer />
+      </Router>
+    </ApolloProvider>
   );
-};
+}
 
 export default App;
+
