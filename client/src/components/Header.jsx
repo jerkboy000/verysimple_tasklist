@@ -20,7 +20,7 @@ const Header = () => {
       setIsLoggedIn(true);
       setWelcome("Welcome, " + getUserInfoFromCookie() + "!");
     } else {
-      setWelcome("Not signed up or logged in!");
+      setWelcome("Discover the Power of Task Organization For the SIMPLETONS!");
     }
   }, []);
 
