@@ -17,22 +17,23 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Header />
-        <div className="content-wrapper">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/signup" element={<SignUpForm />} />
-            <Route path="/login" element={<LogInForm />} />
-            <Route path="/tasklist" element={<TaskList />} />
-            <Route path="/task_form" element={<TaskForm />} />
-            <Route path="/task_form/:taskId" element={<TaskForm />} />
-          </Routes>
+        <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
+          <Header />
+          <div className="flex-grow-1">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/signup" element={<SignUpForm />} />
+              <Route path="/login" element={<LogInForm />} />
+              <Route path="/tasklist" element={<TaskList />} />
+              <Route path="/task_form" element={<TaskForm />} />
+              <Route path="/task_form/:taskId" element={<TaskForm />} />
+            </Routes>
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </Router>
     </ApolloProvider>
   );
 }
 
 export default App;
-

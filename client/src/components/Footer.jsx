@@ -5,9 +5,11 @@ const Footer = () => {
 
   return (
     <footer className="mt-5 py-3 bg-dark text-light text-center">
-      <p>
-        &copy; {currentYear} Very Simple Task App | Created by Minggoy
-      </p>
+      <div className="container">
+        <p className="mb-0">
+          &copy; {currentYear} Very Simple Task App | Created by Minggoy
+        </p>
+      </div>
     </footer>
   );
 };
