@@ -6,7 +6,7 @@ const express = require("express");
 const expressWinston = require("express-winston");
 const logger = require("./logger");
 
-const sequelize = require("../config/database");
+const sequelize = require("../src/config/database");
 
 const jwt = require("jsonwebtoken");
 
@@ -15,8 +15,8 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 // Models
-const User = require("../models/User");
-const Task = require("../models/Task");
+const User = require("../src/models/User");
+const Task = require("../src/models/Task");
 
 // Define associations with the specified foreign key name
 User.hasMany(Task, { foreignKey: "assignedUserId" });
