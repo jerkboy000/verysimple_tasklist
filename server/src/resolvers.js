@@ -1,7 +1,7 @@
-const User = require("../models/User");
-const Task = require("../models/Task");
-const { hashPassword, verifyPassword } = require("../utils/password_util");
-const { generateToken } = require("../utils/token_util");
+const User = require("../src/models/User");
+const Task = require("../src/models/Task");
+const { hashPassword, verifyPassword } = require("../src/utils/password_util");
+const { generateToken } = require("../src/utils/token_util");
 
 const logger = require("./logger");
 

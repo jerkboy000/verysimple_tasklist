@@ -2,9 +2,9 @@ const describe = require("mocha").describe;
 const it = require("mocha").it;
 const expect = require("chai").expect;
 const sinon = require("sinon");
-const User = require("../models/User");
-const { hashPassword, verifyPassword } = require("../utils/password_util");
-const { generateToken, verifyToken } = require("../utils/token_util");
+const User = require("../src/models/User");
+const { hashPassword } = require("../src/utils/password_util");
+const { generateToken, verifyToken } = require("../src/utils/token_util");
 const resolvers = require("../src/resolvers");
 const logger = require("../src/logger");
 
@@ -42,10 +42,10 @@ describe("User Resolver Tests", () => {
       sinon.stub(User, "findOne").resolves(null);
       sinon.stub(User, "create").resolves(newUser);
       sinon
-        .stub(require("../utils/password_util"), "hashPassword")
+        .stub(require("../src/utils/password_util"), "hashPassword")
         .resolves("hashedPassword");
       sinon
-        .stub(require("../utils/token_util"), "generateToken")
+        .stub(require("../src/utils/token_util"), "generateToken")
         .callsFake((user) => generateToken(user));
 
       // Mock the context with the decoded user
@@ -86,10 +86,10 @@ describe("User Resolver Tests", () => {
       sinon.stub(User, "findOne").resolves(user);
 
       sinon
-        .stub(require("../utils/password_util"), "verifyPassword")
+        .stub(require("../src/utils/password_util"), "verifyPassword")
         .resolves(true);
       sinon
-        .stub(require("../utils/token_util"), "generateToken")
+        .stub(require("../src/utils/token_util"), "generateToken")
         .callsFake((user) => generateToken(user));
 
       // Mock the context with the decoded user
