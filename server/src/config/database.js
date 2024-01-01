@@ -9,17 +9,21 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
     timezone: process.env.DB_TIMEZONE,
-  },
+  }
 );
 
-// Connect to database
+// Connect to the database and sync models
 sequelize
   .authenticate()
   .then(() => {
     logger.info("Connection established successfully");
+    return sequelize.sync({ force: false });
+  })
+  .then(() => {
+    logger.info("All models were synchronized successfully");
   })
   .catch((err) => {
-    logger.error(`Unable to connect to the database: ${err.message}`);
+    logger.error(`Unable to connect to the database or sync models: ${err.message}`);
   });
 
 module.exports = sequelize;
