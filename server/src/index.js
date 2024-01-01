@@ -1,14 +1,20 @@
 require("dotenv").config();
 const { expressMiddleware } = require("@apollo/server/express4");
 
+// Express
 const express = require("express");
 const expressWinston = require("express-winston");
+
+// Logging
 const logger = require("./config/logger");
 
+// JSON Web Token
 const jwt = require("jsonwebtoken");
 
+// Cookie parser
 const cookieParser = require("cookie-parser");
 
+// cors
 const cors = require("cors");
 
 // Model associations
@@ -26,6 +32,7 @@ const app = express();
 app.use(requestLogger);
 app.use(cookieParser());
 
+// Apollo setup
 const server = require("../src/config/apollo_setup");
 
 async function startServer() {
