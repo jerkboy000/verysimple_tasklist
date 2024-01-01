@@ -1,5 +1,4 @@
 require("dotenv").config();
-const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
 
 const express = require("express");
@@ -15,7 +14,7 @@ const cors = require("cors");
 // Model associations
 require("./model_association");
 
-// Logging
+// HTTP Logging
 const requestLogger = expressWinston.logger({
   winstonInstance: logger,
   meta: true,
@@ -27,16 +26,7 @@ const app = express();
 app.use(requestLogger);
 app.use(cookieParser());
 
-const typeDefs = require("./schema");
-const resolvers = require("./resolvers");
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  cors: {
-    origin: "http://localhost:5000",
-    credentials: true,
-  },
-});
+const server = require("../src/config/apollo_setup");
 
 async function startServer() {
   await server.start();
