@@ -3,7 +3,7 @@ const Task = require("../src/models/Task");
 const { hashPassword, verifyPassword } = require("../src/utils/password_util");
 const { generateToken } = require("../src/utils/token_util");
 
-const logger = require("./logger");
+const logger = require("./config/logger");
 
 const setTokenCookie = (res, token, logger, mutationName) => {
   if (res.cookie && typeof res.cookie === "function") {

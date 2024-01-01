@@ -4,7 +4,7 @@ const expect = require("chai").expect;
 const sinon = require("sinon");
 const Task = require("../src/models/Task");
 const resolvers = require("../src/resolvers");
-const logger = require("../src/logger");
+const logger = require("../src/config/logger");
 
 describe("Task Resolver Tests", () => {
   it("should get task by ID", async () => {

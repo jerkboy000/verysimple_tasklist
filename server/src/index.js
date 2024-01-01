@@ -3,7 +3,7 @@ const { expressMiddleware } = require("@apollo/server/express4");
 
 const express = require("express");
 const expressWinston = require("express-winston");
-const logger = require("./logger");
+const logger = require("./config/logger");
 
 const jwt = require("jsonwebtoken");
 
