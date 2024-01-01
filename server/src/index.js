@@ -58,7 +58,7 @@ const server = new ApolloServer({
 async function startServer() {
   await server.start();
 
-  const PORT = process.env.PORT || 4000;
+  const PORT = process.env.PORT || 7000;
 
   app.listen(PORT, () => {
     logger.info(`Listening to port ${PORT}.`);
