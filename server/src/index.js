@@ -22,15 +22,7 @@ const Task = require("../src/models/Task");
 User.hasMany(Task, { foreignKey: "assignedUserId" });
 Task.belongsTo(User, { foreignKey: "assignedUserId" });
 
-// Syncing all models
-sequelize
-  .sync({ force: false })
-  .then(() => {
-    logger.info("All models were synchronized sucessfully");
-  })
-  .catch((error) => {
-    logger.error("Error occured during model synchronization: ", error);
-  });
+
 
 // Logging
 const requestLogger = expressWinston.logger({
