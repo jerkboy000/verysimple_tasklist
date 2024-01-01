@@ -14,8 +14,8 @@ const jwt = require("jsonwebtoken");
 // Cookie parser
 const cookieParser = require("cookie-parser");
 
-// cors
-const cors = require("cors");
+// cors setup
+const cors_setup = require("../src/config/cors_setup");
 
 // Model associations
 require("./model_association");
@@ -46,7 +46,7 @@ async function startServer() {
   });
 }
 
-app.use("/", cors(), express.json(), (req, res, next) => {
+app.use("/", cors_setup, express.json(), (req, res, next) => {
   expressMiddleware(server, {
     context: async ({ req }) => {
       const token = req.headers.authorization.split(" ")[1] || "";
