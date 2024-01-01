@@ -22,7 +22,7 @@ const HomePage = () => {
   };
 
   const handleLoginClick = () => {
-    navigate("/login"); // Assuming you have a route for login
+    navigate("/login");
   };
 
   return (
