@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const logger = require("../logger");
+const logger = require("../config/logger");
 
 // Function to hash (encrypt) a password
 const hashPassword = async (plainPassword) => {

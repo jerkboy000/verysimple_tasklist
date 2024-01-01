@@ -6,7 +6,7 @@ const User = require("../src/models/User");
 const { hashPassword } = require("../src/utils/password_util");
 const { generateToken, verifyToken } = require("../src/utils/token_util");
 const resolvers = require("../src/resolvers");
-const logger = require("../src/logger");
+const logger = require("../src/config/logger");
 
 describe("User Resolver Tests", () => {
   it("should get user by ID", async () => {
